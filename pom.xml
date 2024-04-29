@@ -17,25 +17,28 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
     </properties>
 
-    <dependencies>
-        <!-- Add your dependencies here -->
-        <!-- Example dependency: -->
-        <!-- <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-        </dependency> -->
-    </dependencies>
-
     <build>
         <plugins>
+            <!-- Configure depgraph-maven-plugin -->
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <groupId>com.github.ferstl</groupId>
+                <artifactId>depgraph-maven-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <id>generate-graph</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>graph</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
+                    <includes>
+                        <include>com.example:*</include>
+                    </includes>
+                    <outputFormat>dot</outputFormat>
+                    <outputFile>${project.build.directory}/dependency-graph.dot</outputFile>
                 </configuration>
             </plugin>
         </plugins>
