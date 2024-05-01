@@ -28,5 +28,5 @@ jobs:
     - name: Log in to Docker Hub and push Docker image
       run: |
         echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "varun453" --password-stdin
-        docker build -t varun453/labfat:latest .
-        docker push varun453/labfat:latest
+        docker build -t varun453/final:latest .
+        docker push varun453/final:latest
